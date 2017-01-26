@@ -19,7 +19,7 @@ let buttons_name = [
     return (
       <div className="">
       	<Navigation buttons={ buttons_name }/>
-      	<InfoContainer/>
+      	{this.props.children}
       </div>
     );
   }

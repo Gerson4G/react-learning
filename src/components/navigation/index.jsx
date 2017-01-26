@@ -8,7 +8,6 @@ class Navigation extends React.Component{
  render() {
     return (
       <div className="navigation">
-      	<InfoContainer/>
       	<ProfilePic/>
         <ButtonsContainer className="" buttons = {this.props.buttons}></ButtonsContainer>
       </div>

@@ -1,13 +1,11 @@
 import React from 'react'
+import InfoArea from '../info-area/index.jsx'
 
 class InfoContainer extends React.Component{
 
  render() {
     return (
-      <div className="">
-      	<h1>Titulo</h1>
-      	<p>Lorem Ipsum coler</p>
-      </div>
+     	<InfoArea/>
     );
   }
 
