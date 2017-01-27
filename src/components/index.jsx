@@ -9,7 +9,7 @@ ReactDOM.render(
 
 	<Router history={hashHistory}>
 		<Route path='/' component={MainContainer}>
-			<Route path='about' component={InfoContainer}/>
+			<Route path='About' component={InfoContainer}/>
 			<Route path='skills' component={InfoContainer}/>
 		</Route>
 	</Router>

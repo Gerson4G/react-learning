@@ -5,7 +5,7 @@ class InfoContainer extends React.Component{
 
  render() {
     return (
-     	<InfoArea/>
+     	<InfoArea pathname= {this.props.location.pathname}/>
     );
   }
 

@@ -72,7 +72,7 @@
 		_react2.default.createElement(
 			_reactRouter.Route,
 			{ path: '/', component: _index2.default },
-			_react2.default.createElement(_reactRouter.Route, { path: 'about', component: _index4.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'About', component: _index4.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'skills', component: _index4.default })
 		)
 	), document.getElementById('main'));
@@ -26823,7 +26823,7 @@
 	  _createClass(InfoContainer, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_index2.default, null);
+	      return _react2.default.createElement(_index2.default, { pathname: this.props.location.pathname });
 	    }
 	  }]);
 
@@ -26836,10 +26836,10 @@
 /* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -26857,32 +26857,69 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var InfoArea = function (_React$Component) {
-	  _inherits(InfoArea, _React$Component);
+		_inherits(InfoArea, _React$Component);
 
-	  function InfoArea() {
-	    _classCallCheck(this, InfoArea);
+		function InfoArea(props) {
+			_classCallCheck(this, InfoArea);
 
-	    return _possibleConstructorReturn(this, (InfoArea.__proto__ || Object.getPrototypeOf(InfoArea)).apply(this, arguments));
-	  }
+			var _this = _possibleConstructorReturn(this, (InfoArea.__proto__ || Object.getPrototypeOf(InfoArea)).call(this, props));
 
-	  _createClass(InfoArea, [{
-	    key: "render",
-	    value: function render() {
+			_this.state = { res: [] };
+			return _this;
+		}
 
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "" },
-	        this.props.location,
-	        _react2.default.createElement(
-	          "p",
-	          null,
-	          "Lorem Ipsum coler"
-	        )
-	      );
-	    }
-	  }]);
+		_createClass(InfoArea, [{
+			key: 'componentWillUpdate',
+			value: function componentWillUpdate() {
+				var _this2 = this;
 
-	  return InfoArea;
+				var path = this.props.pathname;
+				var url = void 0;
+
+				if (path == '/About') url = 'http://localhost:8000/About/1';else if (path == '/Skills') url = 'http://localhost:8000/About/2';
+				fetch(url, {
+					method: 'get'
+				}).then(function (response) {
+					return response.json();
+				}).then(function (res) {
+					_this2.setState({ res: res });
+				});
+			}
+		}, {
+			key: 'componentWillMount',
+			value: function componentWillMount() {
+				var _this3 = this;
+
+				var path = this.props.pathname;
+				var url = void 0;
+
+				if (path == '/About') url = 'http://localhost:8000/About/1';else if (path == '/Skills') url = 'http://localhost:8000/About/2';
+				fetch(url, {
+					method: 'get'
+				}).then(function (response) {
+					return response.json();
+				}).then(function (res) {
+					_this3.setState({ res: res });
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+
+				return _react2.default.createElement(
+					'div',
+					{ className: '' },
+					this.state.res.name,
+					_react2.default.createElement(
+						'p',
+						null,
+						'Lorem Ipsum coler'
+					)
+				);
+			}
+		}]);
+
+		return InfoArea;
 	}(_react2.default.Component);
 
 	exports.default = InfoArea;
