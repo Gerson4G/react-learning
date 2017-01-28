@@ -26869,8 +26869,8 @@
 		}
 
 		_createClass(InfoArea, [{
-			key: 'componentWillUpdate',
-			value: function componentWillUpdate() {
+			key: 'componentDidUpdate',
+			value: function componentDidUpdate() {
 				var _this2 = this;
 
 				var path = this.props.pathname;
