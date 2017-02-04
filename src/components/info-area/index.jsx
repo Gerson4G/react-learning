@@ -1,14 +1,10 @@
 import React from 'react'
+import { observer } from 'mobx-react'
 
+@observer
 class InfoArea extends React.Component{
 
-	
-	constructor(props) {
-	    super(props)
-	    this.state = { res: [] }
-  	}
-
-  	componentWillUpdate() {  
+  	componentDidUpdate() {  
 
 	let path = this.props.pathname;
 	let url;
@@ -22,7 +18,8 @@ class InfoArea extends React.Component{
 		}).then((response) => {
 	        return response.json()
 	      }).then((res)=>{
-	      	this.setState({ res: res })
+	      	this.props.store.addInfo(res.name)
+
 	      })
   	}	
 
@@ -40,15 +37,17 @@ class InfoArea extends React.Component{
 		}).then((response) => {
 	        return response.json()
 	      }).then((res)=>{
-	      	this.setState({ res: res })
+	      	this.props.store.addInfo(res.name)
+
 	      })
   	}	
-
+	
  render() {
+ 
 
     return (
       <div className="">
-      {this.state.res.name}
+		{this.props.store.infosValue()}
       	<p>Lorem Ipsum coler</p>
       </div>
     );

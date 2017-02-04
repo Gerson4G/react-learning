@@ -1,11 +1,12 @@
 import React from 'react'
 import InfoArea from '../info-area/index.jsx'
+import InfoStore from '../infoStore.js'
 
 class InfoContainer extends React.Component{
 
  render() {
     return (
-     	<InfoArea pathname= {this.props.location.pathname}/>
+     	<InfoArea store={InfoStore} pathname= {this.props.location.pathname}/>
     );
   }
 
