@@ -1,53 +1,43 @@
 import React from 'react'
 import { observer } from 'mobx-react'
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
-@observer
+
+//@observer
+//{this.props.store.infosValue()}
 class InfoArea extends React.Component{
+
+	static propTypes = {
+ 	data: React.PropTypes.shape({
+    loading: React.PropTypes.bool,
+    error: React.PropTypes.object,
+    Projects: React.PropTypes.object,
+  }).isRequired,
+}
 
   	componentDidUpdate() {  
 
-	let path = this.props.pathname;
-	let url;
-
-		if(path=='/About')
-			url = 'http://localhost:8000/About/1'
-		else if(path=='/Skills')
-			url = 'http://localhost:8000/About/2'
-	    fetch(url, {
-			method: 'get'
-		}).then((response) => {
-	        return response.json()
-	      }).then((res)=>{
-	      	this.props.store.addInfo(res.name)
-
-	      })
+  		console.log(this.props.data)
   	}	
 
 	componentWillMount() {  
-
+	
 	let path = this.props.pathname;
-	let url;
+	let ProfileWithData
 
-		if(path=='/About')
-			url = 'http://localhost:8000/About/1'
-		else if(path=='/Skills')
-			url = 'http://localhost:8000/About/2'
-	    fetch(url, {
-			method: 'get'
-		}).then((response) => {
-	        return response.json()
-	      }).then((res)=>{
-	      	this.props.store.addInfo(res.name)
 
-	      })
   	}	
 	
  render() {
- 
-
+ console.log(this.props.data.allProjects)
+if(!this.props.data.loading)
+	return(<div>Cargando</div>)
+else
     return (
       <div className="">
-		{this.props.store.infosValue()}
+		
+		{this.props.data.allProjects}
       	<p>Lorem Ipsum coler</p>
       </div>
     );
@@ -55,4 +45,21 @@ class InfoArea extends React.Component{
 
 }
 
-export default InfoArea
+	const Rest = gql`
+		query Projects{
+		  allProjects(name_Icontains:"Tutorial"){
+		  	 edges{
+		  	 	nodes{
+		  	 		name	
+		  	 	}
+		  	 }
+		        
+		  }
+		}
+		`
+
+		
+const		ProfileWithData = graphql(Rest)(InfoArea);
+
+
+export default ProfileWithData
